@@ -1,0 +1,143 @@
+<html lang="en">
+
+<head>
+    <title>Tourism - Warangal</title>
+    <style>
+        /* Body with background image */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014551/Warangal10.png'); /* Add your image URL here */
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ff6347; /* Tomato color */
+        }
+
+        header img {
+            width: 70px;
+            height: 70px;
+        }
+
+        /* Navigation buttons styling */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav li {
+            display: inline;
+            margin: 15px;
+        }
+
+        nav button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        nav button:hover {
+            background-color: #e5533d;
+        }
+
+        /* Main section styling */
+        .main {
+            padding: 20px;
+            text-align: center;
+            color: white; /* Ensure text is readable on background */
+        }
+
+        /* Heritage site images styling */
+        .heritage-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .heritage-list img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .heritage-list img:hover {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto; /* Ensure footer is at the bottom */
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Home Page -->
+    <div id="home">
+        <header>
+            <h1 id="logo"><a href="/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMAI0iqwOc5ciCQ0FsFQQw1Ch7NZYsyGfjog&s" alt="logo" />Tourism</a></h1>
+        </header>
+        <main class="main">
+            <p>Welcome to the official tourism website of Warangal. Explore our rich heritage, find the best places to stay, and enjoy the beautiful scenery through our gallery.</p>
+
+            <!-- Navigation buttons -->
+            <nav>
+                <ul>
+                    <li><button onclick="window.location.href='heritage.html'">Heritage Sites</button></li>
+                    <li><button onclick="window.location.href='hotel_booking.html'">Hotel Booking</button></li> <!-- Link to Hotel Booking page -->
+                    <li><button onclick="window.location.href='gallery.html'">Gallery</button></li>
+                </ul>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Footer with social media links -->
+    <footer>
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        <a href="https://twitter.com/" target="_blank">Twitter</a>
+        <a href="https://wa.me/" target="_blank">WhatsApp</a>
+        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <title>Heritage Sites - Warangal Tourism</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ff6347;
+        }
+
+        .main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .heritage-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .heritage-list img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .heritage-list img:hover {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Heritage Sites Page -->
+    <div id="heritage">
+        <header>
+            <h1>Heritage Sites</h1>
+            <nav>
+                <ul>
+                    <li><button onclick="window.location.href='tourism.html'">Back to Home</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <h2>Explore Heritage Sites of Warangal</h2>
+            <ul class="heritage-list">
+                <li><a href="badrakali.html"><img src="https://lh3.googleusercontent.com/p/AF1QipNXjNq6dmuAsgG0SezC-43FjdfKtFdrDtcowlAp=s1360-w1360-h1020-rw" alt="BADRAKALI TEMPLE"></a></li>
+                <li><a href="thousandpillartemple.html"><img src="https://lh3.googleusercontent.com/p/AF1QipOhSE9bwzgokvEfhmlkDGcsnmrp_EOYKtQp9E7W=s1360-w1360-h1020-rw" alt="THOUSAND PILLAR TEMPLE"></a></li>
+                <li><a href="ramappa.html"><img src="https://lh3.googleusercontent.com/p/AF1QipOB_0I-JOjw7hvIqXzFcM9oicqfHQx6bd4lB4SE=s1360-w1360-h1020-rw" alt="RAMAPPA TEMPLE"></a></li>
+                <li><a href="warangalfort.html"><img src="https://lh3.googleusercontent.com/p/AF1QipNyUhI7UrML4OaGNjdsYqWtl8O6YvNaX2Lc_JGn=s1360-w1360-h1020-rw" alt="WARANGAL FORT"></a></li>
+            </ul>
+        </main>
+    </div>
+
+    <!-- Footer with social media links -->
+    <footer>
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        <a href="https://twitter.com/" target="_blank">Twitter</a>
+        <a href="https://wa.me/" target="_blank">WhatsApp</a>
+        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+    </footer>
+
+</body>
+
+</html>
