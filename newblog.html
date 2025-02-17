@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="A sports blog covering the latest news and updates in various sports including football, tennis, cricket, and more.">
+</head>
+<style>
+:root {
+    --main-color: #333;
+    --secondary-color: #ff5733;
+    --font-color: white;
+    --bg-color: #f9f9f9;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--main-color);
+    color: var(--font-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-family: 'Lobster', cursive;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: var(--font-color);
+    text-decoration: none;
+    position: relative;
+}
+
+header nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--font-color);
+    transition: width .3s;
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url('https://www.gpgcjaiharikhal.ac.in/img/sports.jpg') no-repeat center center/cover;
+    color: var(--font-color);
+    text-align: center;
+}
+
+#hero h1 .font1 {
+    font-family: 'Roboto', sans-serif;
+}
+
+#hero h1 .font2 {
+    font-family: 'Playfair Display', serif;
+}
+
+.ripple {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    margin-top: 20px;
+}
+
+.ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s;
+}
+
+.ripple:active::before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: 0s;
+}
+
+#blog {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    background-color: var(--bg-color);
+    flex-wrap: wrap;
+}
+
+.blog-card {
+    background: var(--font-color);
+    padding: 20px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform 0.3s;
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+}
+
+.blog-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin: 10px auto;
+    display: block;
+    filter: grayscale(50%);
+    shape-outside: circle();
+    -webkit-mask-image: radial-gradient(circle, white, transparent);
+}
+
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+
+.category {
+    background-color: var(--main-color);
+    color: var(--font-color);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.category:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+#subscribe {
+    padding: 40px;
+    text-align: center;
+}
+
+#subscribe form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.subscribe-btn {
+    background-color: var(--main-color);
+    color: var(--font-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.subscribe-btn:hover {
+    box-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
+}
+
+footer {
+    background-color: var(--main-color);
+    color: var(--font-color);
+    text-align: center;
+    padding: 20px;
+}
+
+footer .social-icons i {
+    font-size: 24px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+}
+
+footer .footer-logos img {
+    height: 40px;
+    width: 40px;
+    filter: invert(100%);
+    transition: transform 0.3s;
+}
+
+footer .footer-logos a:hover img {
+    transform: scale(1.1);
+}
+
+footer .social-icons i:hover {
+    transform: rotate(20deg) scale(1.2);
+}
+</style>
+<body>
+    <header>
+        <div class="logo">Sports Blog</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1><span class="font1">Welcome to</span> <span class="font2">Sports Blog</span></h1>
+        <a href="newreadmore.html"><button class="ripple">Read More</button></a>
+    </section>
+
+    <section id="blog">
+        <div class="blog-container">
+            <div class="blog-card">
+                <h2>Swiss skier Rast leads, Shiffrin stands third in first run of slalom at Alpine world championships</h2>
+                <p>Shiffrin had 0.72 to make up in the second run later Saturday.
+                “I think that was some of the best skiing I’ve done lately,” said the American star, who is chasing her record 16th career medal at the worlds.
+                Shiffrin won gold with American teammate Breezy Johnson in the team combined on Tuesday but sat out the giant slalom two days later. She felt not ready yet to race GS after recovering from an abdominal injury sustained in a GS crash in Killington, Vermont in November. Rast leads the slalom season standings after getting the first two World Cup wins of her career.
+                “I just did my thing and found my flow,” said Rast, who is competing at her fifth worlds but has yet to win a medal, though she won gold in slalom at the 2017 junior world championships.
+                </p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6rpYb1_naptH1UcwnKfy4z7qb0Nj2Z8S4Pw&s" alt="Swiss skier Rast leads" />
+            </div>
+            <div class="blog-card">
+                <h2>Game Recap</h2>
+                <p>"Good decision," Finland coach Antti Pennanen said. Great for Finland...Instead of looking for Aleksander Barkov or Niko Mikkola on a 3-on-1, Granlund got selfish at the right time. His shot from the right face-off circle found the back of the net 1:49 into overtime, and Finland stayed alive in the 4 Nations Face-Off with a 4-3 win against Sweden at Bell Centre on Saturday.
+                It was Finland’s first overtime goal in an NHL international tournament game.
+                "I finally shot one of those," Granlund said. "I'm glad it went in. Obviously, it was a tight game all around. Great job for us."
+                Anton Lundell, Mikko Rantanen and Barkov also scored                 for Finland (0-1-0-1), which trailed 3-2 in the second period. Patrik Laine had two assists, and Kevin Lankinen made 21 saves in his first start after he was the backup to Juuse Saros in a 6-1 loss to the United States on Thursday.</p>
+                <img src="https://media.d3.nhle.com/image/private/t_ratio16_9-size20/dpr_2.0/f_auto/v1739133761/prd/jzoketb6xbeao7nuylix.jpg" alt="Game Recap Image" />
+            </div>
+            <div class="blog-card">
+                <h2>Foot Ball</h2>
+                <p>Over the course of his career, Portuguese footballer Cristiano Ronaldo has received five Ballon d'Or/FIFA Ballon d'Or awards,[a] the most for a European player. Widely regarded as one of the greatest players of all time, Ronaldo holds the record for most goals in the UEFA Champions League (140 goals), and the record for most goals in the UEFA European Championship (14), its qualification stage (40), and the FIFA Club World Cup (7), as well as most goals scored in a UEFA Champions League season (17 in 2013–14), most international goals (135), and most appearances in a national team (217). He has scored a record 924 senior career goals for club and country. Moreover, he is one of the few recorded players to have made over 1,250 professional career appearances.</p>
+                <img src="https://variety.com/wp-content/uploads/2024/08/GettyImages-2160855156.jpg?w=1000&h=667&crop=1" alt="Cristiano Ronaldo" />
+            </div>
+            <div class="blog-card">
+                <h2>Global Sports</h2>
+                <p>New Delhi [India], February 14: In an insightful interview with Haslinda Amin on Bloomberg TV's show Latitude, Nita Ambani, Chairperson of Reliance Foundation and the visionary force behind Reliance Industries' commitment to sports, delved into the company's ongoing efforts to elevate sports in India and establish a global sporting presence. The conversation illuminated Nita Ambani's deep personal connection to sports, particularly her love for cricket. "I fell in love with cricket," she shared candidly, adding that she immersed herself in the sport by reading extensively about it and speaking to any cricketer she could find. Her passion for the game goes beyond just watching; it's a pursuit of understanding the nuances of cricket. "Cricket is not an easy game. There are different aspects to the game," she explained, underlining the complex nature of the sport that fuels her ongoing involvement in it.
+                </p>
+                <img src="https://lh6.googleusercontent.com/proxy/ALMeKrPYEgfDBsOLF696-QcHN05lcumxSuKgofZ4Xf9vgDyNd4P-e_RVP7pSm8V769LyWqGtdDO71QfZSIL3UA" alt="Global Games" />
+            </div>
+            <div class="blog-card">
+                <h2>Wrestlers seek sports minister's intervention for Albania Ranking Series approval</h2>
+                <p>New Delhi, Asian champion Sunil Kumar, U-23 Asian Championship gold winner Minakshi and several other Indian wrestlers gathered at Sports Minister Mansukh Mandaviya's residence on Saturday, seeking his intervention to secure approval for their participation in the upcoming Ranking Series in Albania. The ministry has withheld approval for the wrestlers to participate in the second Ranking Series of the year scheduled to take place in Tirana, Albania, from February 26 to March 2. "We are unable to participate in the tournament and hence we came to the minister's residence to request him to let us participate in the tournament," Kumar told PTI Videos.
+                </p>
+                <img src="https://media.assettype.com/outlookindia/2024-04/eebd35e6-3ce5-4e66-8c80-a694a86eacc8/Asian_Wrestling_Championships_2024__UWW_photo.jpg?w=801&auto=format%2Ccompress&fit=max&format=webp&dpr=1.0" alt="Indian Wrestlers" />
+            </div>
+            <div class="blog-card">
+                <h2>D Gukesh’s chief trainer sends Norway Chess challenge to Magnus Carlsen, lays down 2025 plans for India No. 1</h2>
+                <p>For D Gukesh, Norway Chess 2025 will be about showcasing his domination in the classical format. The reigning world champion had a winless run at the Weissenhaus Freestyle Chess Grand Slam, and finished in eighth position. Norway Chess 2025 is scheduled for May 26-June 6, fans will get to see Gukesh face the likes of Arjun Erigaisi, Magnus Carlsen, Hikaru Nakamura, and Wei Yi. Speaking to ChessBase India at the sidelines of the first Freestyle Grand Slam Tour event, Grzegorz Gajewski, who is also D Gukesh’s chief trainer, opened up on the India No. 1 ambitions for 2025.
+                </p>
+                <img src="https://www.hindustantimes.com/ht-img/img/2025/02/15/550x309/1000016803_1738389348549_1739614450627.jpg" alt="Chess" />
+            </div>
+            <div class="blog-card">
+                <h2>Sri Lanka vs Australia Highlights: Sri Lanka beat Australia by 174 runs</h2>
+                <p>Sri Lanka vs Australia Live Score:
+                First Innings
+                Sri Lanka Score - 281/4 in 50.0 overs
+                Sri Lanka batting performance
+                Kusal Mendis 101(115)
+                Charith Asalanka 78(66)
+                Sean Abbott 10-41-1
+                Ben Dwarshuis 10-47-1
+                Second Innings
+                Australia Score - 107/10 in 24.2 overs
+                Australia batting performance
+                Steven Smith 29(34)
+                Josh Inglis 22(27)
+                Dunith Wellalage 7.2-35-4
+                Wanindu Hasaranga 7-23-3</p>
+                <img src="https://www.hindustantimes.com/ht-img/img/2023/10/06/550x309/CRICKET-ICC-MENS-WC-2023-ENGNZL-ODI-6_1696592836309_1696592836773.jpg" alt="Cricket" />
+            </div>
+            <div class="blog-card">
+                <h2>National Games: Bronze medallist fencer Shruti battles dearth of resources</h2>
+                <p>Mumbai: Bhavani Devi’s Tokyo Olympics breakthrough, one assumed, would have opened the floodgates for fencing in India to some extent. But for those like Shruti Joshi, who became the National Games bronze medallist after a fighting loss to Bhavani in the women’s sabre semi-finals, undercurrents of this far from developed niche sport in the country continue to be felt. Be it in her early days of pursuing this expensive sport coming from a humble background in Nagpur — her father is employed privately as a driver and her mother is a housewife. Or be it now as a 22-year-old knocking on multiple doors for financial support to go a level up from competing domestically to internationally.
+                </p>
+                <img src="https://www.hindustantimes.com/ht-img/img/2025/02/14/550x309/Shruti-Joshi--HT-_1739558927181.jpg" alt="Fencing" />
+            </div>
+           
+        </div>
+    </section>
+
+
+    <section id="categories">
+        <button class="category">Football</button>
+        <button class="category">Basketball</button>
+        <button class="category">Tennis</button>
+        <button class="category">Badminton</button>
+        <button class="category">Cricket</button>
+        <button class="category">Handball</button>
+        <button class="category">Hockey</button>
+        <button class="category">Rugby</button>
+        <button class="category">Ice Skating</button>
+    </section>
+
+    <section id="subscribe">
+        <form>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <input type="tel" placeholder="Mobile Number">
+            <button class="subscribe-btn">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <div>Contact Us:</div>
+        <div>Phone: +91-1234567890</div>
+        <div>Phone: +91-9876543210</div>
+        <div class="footer-logos">
+            <a href="https://www.facebook.com"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-1024.png" alt="Facebook" class="logo-img"></a>
+            <a href="https://www.twitter.com"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png" alt="Twitter" class="logo-img"></a>
+            <a href="https://www.youtube.com"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Youtube_colored_svg-1024.png" alt="YouTube" class="logo-img"></a>
+            <a href="https://www.linkedin.com"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Linkedin_unofficial_colored_svg-1024.png" alt="LinkedIn" class="logo-img"></a>
+            <a href="https://www.instagram.com"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Instagram_colored_svg_1-1024.png" alt="Instagram" class="logo-img"></a>
+        </div>
+    </footer>
+</body>
+</html>
