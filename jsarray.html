@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Watchlist</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url('https://media.istockphoto.com/id/1194541872/vector/realistic-3d-cinema-film-strip-in-perspective-isolated-on-blue-background-vector-template.jpg?s=612x612&w=0&k=20&c=BuygDRH6v-u651E3O009P395h8crapr_CrSoXOF7R0s='); 
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }   
+            .container {
+            background-color: lightblue; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+              }
+        .button-container {
+            margin-top: 15px;
+        }
+        h2 {
+            color: black;
+            font-family: 'Courier New', Courier, monospace; 
+            font-weight: bold;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            margin: 10px;
+            border: 1px solid #888;
+            border-radius: 5px;
+            background-color: #fffaf0;
+            color: #333; 
+        }
+        button {
+            padding: 10px 20px;
+            background-color: green; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #B3D8A8; 
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            background-color: #fffacd; 
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            color: #333; /* Change color of the list items */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ADD TO WATCH MOVIES</h2>
+        <input type="text" id="movieInput" placeholder="Enter movie name">
+        <div class="button-container">
+            <button id="addButton">Add movie</button>
+            <button id="clearButton">Clear list</button>
+        </div>
+        <ul id="movieList"></ul>
+    </div>
+
+    <script>
+        let movieArray = [];
+
+        document.getElementById("addButton").addEventListener("click", addMovie);
+        document.getElementById("clearButton").addEventListener("click", clearList);
+
+        function addMovie() {
+            let movieInput = document.getElementById("movieInput");
+            let movieName = movieInput.value.trim();
+            
+            if (movieName) {
+                movieArray.push(movieName);
+                movieInput.value = "";
+                displayMovies();
+            } else {
+                alert("Please enter a movie name.");
+            }
+        }
+
+        function displayMovies() {
+            let movieList = document.getElementById("movieList");
+            movieList.innerHTML = "";
+            movieArray.forEach((movie, index) => {
+                let li = document.createElement("li");
+                li.textContent = (index + 1) + ". " + movie; // Adding index to the movie name
+                li.addEventListener("click", () => removeMovie(index));
+                movieList.appendChild(li);
+            });
+        }
+
+        function removeMovie(index) {
+            movieArray.splice(index, 1);
+            displayMovies();
+        }
+
+        function clearList() {
+            movieArray = [];
+            displayMovies();
+        }
+    </script>
+</body>
+</html>
