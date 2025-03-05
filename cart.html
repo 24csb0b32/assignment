@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+     
+      box-sizing: border-box;
+      background-image: url('https://img.freepik.com/free-vector/restaurant-mural-wallpaper_23-2148703851.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+}
+
+
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav {
+      background-color: #444;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    main {
+      padding: 1rem;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Ensures three columns */
+      gap: 1rem;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      background-color: #fff;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover transition */
+    }
+
+    .product img {
+      width: 300px;
+      height: 400px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+
+    .product:hover {
+      transform: scale(1.05); /* Slight zoom-in effect on hover */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    }
+
+    .rating {
+      color: #FFD700;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+
+    .price {
+      color: #007bff;
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+
+    button {
+      padding: 0.5rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .cart {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #fff;
+      color: #000;
+      border-radius: 8px;
+    }
+
+    .cart button {
+      background-color: #ff4d4d;
+      margin-left: 1rem;
+    }
+
+    .cart button:hover {
+      background-color: #d93636;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .social-icons a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 24px;
+    }
+    .social-icons a:hover {
+      color: #00aced;
+    }
+  </style>
+  <!-- Add FontAwesome for social media icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>Product Catalog</h1>
+  </header>
+  <nav>
+    <a href="cart.html">Home</a>
+    <a href="discount.html">Discounts</a>
+    <a href="aboutus.html">About Us</a>
+  </nav>
+  <main>
+    <section class="product-list" id="products">
+      <!-- Products will be dynamically added here -->
+    </section>
+    <section class="cart" id="cart">
+      <h2>Your Cart</h2>
+      <p>Your selected products will appear here.</p>
+    </section>
+  </main>
+  <footer>
+    <p>Follow us on social media:</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://wa.me" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>&copy; 2025 Product Catalog. All rights reserved.</p>
+  </footer>
+  <script>
+    class Product {
+      constructor(id, name, price, rating, image) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+        this.image = image;
+      }
+    }
+
+    class Cart {
+      constructor() {
+        this.items = JSON.parse(localStorage.getItem('cartItems')) || [];
+      }
+
+      addItem(product) {
+        this.items.push(product);
+        this.saveCart();
+        this.displayCart();
+        alert(`${product.name} has been added to the cart.`);
+      }
+
+      removeItem(productId) {
+        this.items = this.items.filter(item => item.id !== productId);
+        this.saveCart();
+        this.displayCart();
+      }
+
+      saveCart() {
+        localStorage.setItem('cartItems', JSON.stringify(this.items));
+      }
+
+      displayCart() {
+        const cartContainer = document.getElementById('cart');
+        if (this.items.length === 0) {
+          cartContainer.innerHTML = `
+            <h2>Your Cart</h2>
+            <p>Your cart is empty.</p>
+          `;
+          return;
+        }
+
+        const cartItems = this.items.map(item => `
+          <p>
+            ${item.name} - ₹${item.price}
+            <button onclick="cart.removeItem(${item.id})">Remove</button>
+          </p>
+        `).join('');
+
+        cartContainer.innerHTML = `
+          <h2>Your Cart</h2>
+          ${cartItems}
+        `;
+      }
+    }
+
+    const products = [
+      new Product(1, 'Product 1', 200, '⭐⭐⭐⭐', 'https://www.tasteofhome.com/wp-content/uploads/2023/04/30-Most-Useful-Amazon-Products-Under-30_FT_via-amazon.com_.jpg'),
+      new Product(2, 'Product 2', 700, '⭐⭐⭐', 'https://cdn.designrulz.com/wp-content/uploads/2013/06/designrulz-AA-001.jpg'),
+      new Product(3, 'Product 3', 900, '⭐⭐⭐⭐⭐', 'https://img.buzzfeed.com/buzzfeed-static/static/2019-01/22/14/asset/buzzfeed-prod-web-04/sub-buzz-24126-1548184885-1.jpg?downsize=900:*&output-format=auto&output-quality=auto'),
+      new Product(4, 'Product 4', 1200, '⭐⭐⭐', 'https://www.bobogears.com/wp-content/uploads/2023/12/BB-BM-013-001001-3.jpg'),
+      new Product(5, 'Product 5', 1750, '⭐⭐⭐⭐', 'https://m.media-amazon.com/images/I/41HlNQmfZ5S._SL500_.jpg'),
+      new Product(6, 'Product 6', 2000, '⭐⭐⭐⭐⭐', 'https://www.gadgetcraze.ug/web/image/product.product/2709/image_512?unique=e4d0adb'),
+    ];
+
+    const cart = new Cart();
+
+    function displayProducts() {
+      const productsContainer = document.getElementById('products');
+
+      products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+
+        productDiv.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <p><strong>${product.name}</strong></p>
+          <p class="price">Cost: ₹${product.price}</p>
+          <div class="rating">${product.rating}</div>
+          <button onclick='cart.addItem(${JSON.stringify(product)})'>Add to Cart</button>
+        `;
+
+        productsContainer.appendChild(productDiv);
+      });
+    }
+
+    displayProducts();
+    cart.displayCart();
+  </script>
+</body>
+</html>
+
+   
+
