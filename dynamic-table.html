@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://experience.sap.com/fiori-design-web/wp-content/uploads/sites/5/2020/11/Grid-Table-Schematic-visualization-of-the-grid-table_1.84.png'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      overflow: hidden;
+      padding: 14px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 70px;
+      color: black;
+    }
+
+    input[type="text"], input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 80%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    td button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    td button:hover {
+      background-color: #e57373;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="ass9.html">Home</a>
+    <a href="countdown.html">Countdown Timer</a>
+    <a href="list-operations.html">List Operations</a>
+    <a href="dynamic-table.html">Dynamic Table</a>
+    <a href="gallery.html">Gallery</a>
+  </div>
+
+  <div class="container">
+    <h3>Dynamic Table</h3>
+
+    <input type="text" id="name-input" placeholder="Enter Name" />
+    <input type="number" id="age-input" placeholder="Enter Age" />
+    <button id="add-row">Add Row</button>
+
+    <table id="dynamic-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const addRowButton = document.getElementById('add-row');
+    const nameInput = document.getElementById('name-input');
+    const ageInput = document.getElementById('age-input');
+    const tableBody = document.querySelector('#dynamic-table tbody');
+
+    addRowButton.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const age = ageInput.value.trim();
+
+      if (name && age) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${age}</td>
+          <td>
+            <button class="delete-btn">Delete</button>
+            <button class="update-btn">Update</button>
+          </td>
+        `;
+
+        tableBody.appendChild(newRow);
+
+        nameInput.value = '';
+        ageInput.value = '';
+
+        const deleteButton = newRow.querySelector('.delete-btn');
+        const updateButton = newRow.querySelector('.update-btn');
+
+        deleteButton.addEventListener('click', () => {
+          newRow.remove();
+        });
+
+        updateButton.addEventListener('click', () => {
+          nameInput.value = name;
+          ageInput.value = age;
+          newRow.remove();
+        });
+      } else {
+        alert('Please fill in both fields!');
+      }
+    });
+  </script>
+</body>
+</html>

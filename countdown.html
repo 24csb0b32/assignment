@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.pexels.com/photos/707582/pexels-photo-707582.jpeg'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      color: white;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      overflow: hidden;
+      padding: 14px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      color: black;
+      padding-top: 70px;
+    }
+
+    #timer-display {
+      font-size: 48px;
+      margin: 20px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      width: 150px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #timer-display.green {
+      background-color: green;
+      color: white;
+    }
+
+    #timer-display.yellow {
+      background-color: yellow;
+      color: black;
+    }
+
+    #timer-display.red {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="ass9.html">Home</a>
+    <a href="countdown.html">Countdown Timer</a>
+    <a href="list-operations.html">List Operations</a>
+    <a href="dynamic-table.html">Dynamic Table</a>
+    <a href="gallery.html">Gallery</a>
+  </div>
+
+  <div class="container">
+    <h3>Countdown Timer</h3>
+    <input type="number" id="countdown-input" placeholder="Enter seconds" min="1">
+    <button id="start-btn">Start</button>
+    <button id="pause-btn">Pause</button>
+    <button id="reset-btn">Reset</button>
+    <div id="timer-display">00:00</div>
+  </div>
+
+  <script>
+    const countdownInput = document.getElementById('countdown-input');
+    const startButton = document.getElementById('start-btn');
+    const pauseButton = document.getElementById('pause-btn');
+    const resetButton = document.getElementById('reset-btn');
+    const timerDisplay = document.getElementById('timer-display');
+
+    let countdown;
+    let timerRunning = false;
+    let remainingTime = 0;
+
+    startButton.addEventListener('click', () => {
+      const timeInput = countdownInput.value;
+      if (timeInput > 0 && !timerRunning) {
+        remainingTime = timeInput;
+        countdown = setInterval(updateTimer, 1000);
+        timerRunning = true;
+      }
+    });
+
+    pauseButton.addEventListener('click', () => {
+      clearInterval(countdown);
+      timerRunning = false;
+    });
+
+    resetButton.addEventListener('click', () => {
+      clearInterval(countdown);
+      timerRunning = false;
+      remainingTime = 0;
+      timerDisplay.textContent = '00:00';
+      timerDisplay.className = '';
+    });
+
+    function updateTimer() {
+      if (remainingTime > 0) {
+        remainingTime--;
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (remainingTime > 10) {
+          timerDisplay.className = 'green';
+        } else if (remainingTime > 5) {
+          timerDisplay.className = 'yellow';
+        } else {
+          timerDisplay.className = 'red';
+        }
+      } else {
+        clearInterval(countdown);
+        timerRunning = false;
+        timerDisplay.textContent = 'Time’s Up!';
+        timerDisplay.className = '';
+      }
+    }
+  </script>
+</body>
+</html>

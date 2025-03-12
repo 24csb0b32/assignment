@@ -1,166 +1,167 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Gallery - Warangal Tourism</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('your-image-url.jpg'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
 
-        header {
-            background-color: black;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      overflow: hidden;
+      padding: 14px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
 
-        header h1 {
-            margin: 0;
-            color: #ff6347;
-        }
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
 
-        .main {
-            padding: 20px;
-            text-align: center;
-        }
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
 
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            justify-items: center;
-        }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-top: 70px;
+    }
 
-        .gallery-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s, opacity 0.3s;
-        }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        .gallery-container img:hover {
-            transform: scale(1.05);
-            opacity: 0.8;
-        }
+    .thumbnail {
+      cursor: pointer;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
 
-        .modal-content {
-            max-width: 80%;
-            max-height: 80%;
-        }
+    #image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .modal img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+    #modal-content {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+    }
 
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 36px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    #close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      cursor: pointer;
+    }
 
-        footer {
-            background-color: black;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    #close-modal:hover {
+      color: #f44336;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="navbar">
+    <a href="ass9.html">Home</a>
+    <a href="countdown.html">Countdown Timer</a>
+    <a href="list-operations.html">List Operations</a>
+    <a href="dynamic-table.html">Dynamic Table</a>
+    <a href="gallery.html">Gallery</a>
+  </div>
 
-    <!-- Gallery Page -->
-    <div id="gallery">
-        <header>
-            <h1>Gallery</h1>
-            <nav>
-                <ul>
-                    <li><button onclick="window.location.href='tourism.html'">Back to Home</button></li>
-                    <li><button onclick="window.location.href='heritage.html'">Heritage Sites</button></li>
-                </ul>
-            </nav>
-        </header>
+  <div class="container">
+    <h3>Image Gallery</h3>
 
-        <main class="main">
-            <h2>Explore the Beautiful Scenery of Warangal</h2>
-
-            <!-- Gallery Container -->
-            <div class="gallery-container">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014445/Warangal1.png" alt="Warangal Image 1" onclick="openModal(this)">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014500/Warangal2.png" alt="Warangal Image 2" onclick="openModal(this)">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014506/Warangal3.png" alt="Warangal Image 3" onclick="openModal(this)">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014513/Warangal4.png" alt="Warangal Image 4" onclick="openModal(this)">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014544/Warangal9.png" alt="Warangal Image 5" onclick="openModal(this)">
-                <img src="https://assets-news.housing.com/news/wp-content/uploads/2022/09/16014551/Warangal10.png" alt="Warangal Image 6" onclick="openModal(this)">
-            </div>
-        </main>
+    <!-- Thumbnails in a 3-column grid -->
+    <div class="gallery-grid">
+      <img src="https://images.pexels.com/photos/128817/pexels-photo-128817.jpeg?cs=srgb&dl=pexels-brunocervera-128817.jpg&fm=jpg" alt="Image 1" class="thumbnail" id="img1" />
+      <img src="https://images.pexels.com/photos/1629780/pexels-photo-1629780.jpeg?cs=srgb&dl=pexels-ilargian-faus-763704-1629780.jpg&fm=jpg" alt="Image 2" class="thumbnail" id="img2" />
+      <img src="https://media.istockphoto.com/id/543219820/photo/dog-spa-wellness.jpg?s=612x612&w=0&k=20&c=a064oE4bUWwmPI1iUmREk_vndw4XD69V2SYv0RfYGrM=" alt="Image 3" class="thumbnail" id="img3" />
+      <img src="https://c4.wallpaperflare.com/wallpaper/531/1007/739/dogs-funny-puppies-shiba-inu-1067x853-animals-dogs-hd-art-wallpaper-preview.jpg" alt="Image 4" class="thumbnail" id="img4" />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLhJNrZP5Ej5t2lCw6S4nO2XkMr2QhkL-eDQ&s=" alt="Image 5" class="thumbnail" id="img5" />
+      <img src="https://plus.unsplash.com/premium_photo-1677542200541-dccdea386537?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZnVubnklMjBkb2d8ZW58MHx8MHx8fDA%3D" alt="Image 6" class="thumbnail" id="img6" />
     </div>
 
-    <!-- Modal for Image View -->
-    <div class="modal" id="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <img id="modal-img" src="" alt="Expanded Image">
-        </div>
-    </div>
+  </div>
 
-    <!-- Footer with social media links -->
-    <footer>
-        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-        <a href="https://twitter.com/" target="_blank">Twitter</a>
-        <a href="https://wa.me/" target="_blank">WhatsApp</a>
-        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
-    </footer>
+  <!-- Modal for full-size image -->
+  <div id="image-modal">
+    <button id="close-modal">×</button>
+    <img id="modal-content" src="" alt="Large image" />
+  </div>
 
-    <script>
-        // Function to open modal with clicked image
-        function openModal(image) {
-            var modal = document.getElementById("modal");
-            var modalImg = document.getElementById("modal-img");
-            modal.style.display = "flex";
-            modalImg.src = image.src;
-        }
+  <script>
+    const modal = document.getElementById('image-modal');
+    const modalContent = document.getElementById('modal-content');
+    const closeModalButton = document.getElementById('close-modal');
 
-        // Function to close modal
-        function closeModal() {
-            var modal = document.getElementById("modal");
-            modal.style.display = "none";
-        }
-    </script>
+    // Get all thumbnails
+    const thumbnails = document.querySelectorAll('.thumbnail');
 
+    // Function to open the modal with the clicked image
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        modalContent.src = thumbnail.src; // Open the clicked image
+        modal.style.display = 'flex'; // Show modal
+      });
+    });
+
+    // Close the modal when the close button is clicked
+    closeModalButton.addEventListener('click', () => {
+      modal.style.display = 'none'; // Hide modal
+    });
+
+    // Close the modal when clicking anywhere outside the modal content
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none'; // Hide modal
+      }
+    });
+  </script>
 </body>
-
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Toggle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+      background-image: url('https://t4.ftcdn.net/jpg/01/87/93/43/360_F_187934325_5v2sGOZ5qvD4Rgo2mxwCxbQ46a6U6Mm2.jpg'); 
+      background-size: cover;
+      background-position: center;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent navbar */
+      color: white;
+      overflow: hidden;
+      padding: 14px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: black;
+      padding-top: 70px; /* To avoid content being hidden behind the navbar */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    body.dark-mode {
+      background-color: #2c3e50;
+      color: white;
+      background-image: url('https://www.shutterstock.com/image-illustration/luxury-wallpaper-mystical-seamless-pattern-260nw-2120753705.jpg'); 
+    }
+
+    body.dark-mode .navbar {
+      background-color: rgba(0, 0, 0, 0.8); 
+    }
+
+    body.dark-mode button {
+      background-color: #34495e;
+      color: white;
+    }
+
+    body.dark-mode button:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Toggle Mode</a>
+    <a href="countdown.html">Countdown Timer</a>
+    <a href="list-operations.html">List Operations</a>
+    <a href="dynamic-table.html">Dynamic Table</a>
+    <a href="gallery.html">Gallery</a>
+  </div>
+
+  <div class="container">
+    <button id="theme-toggle">Switch to Dark Mode</button>
+  </div>
+
+  <script>
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggleButton.innerText = 'Switch to Light Mode';
+    }
+
+    themeToggleButton.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        themeToggleButton.innerText = 'Switch to Light Mode';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeToggleButton.innerText = 'Switch to Dark Mode';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
+</body>
+</html>
