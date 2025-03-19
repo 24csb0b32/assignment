@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Information Checker</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background image and page style */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://www.gepsi.com/wp-content/uploads/2022/12/Visitor-Visa-new-zealand.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 40px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Container for the form and result */
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+            padding: 40px 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        /* Select box */
+        select {
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            width: 100%;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background-color: #555;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        select:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        /* Button styles */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1.2rem;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Result styling */
+        #result {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeInText 0.5s forwards;
+        }
+
+        .alert {
+            color: #f44336;
+            font-weight: 700;
+            animation: shake 0.5s ease-out;
+        }
+
+        /* Animation for FadeIn */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for Slide In */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for fading in result text */
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Shake effect for error */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Media Query for responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            select, button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Your Country</h2>
+        <select id="countrySelect">
+            <option value="">--Select a Country--</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+        </select>
+        <button onclick="checkVisa()">Check Visa</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkVisa() {
+            const country = document.getElementById("countrySelect").value;
+            const resultDiv = document.getElementById("result");
+            
+            // Clear previous message
+            resultDiv.classList.remove("alert");
+            resultDiv.style.opacity = "0";  // Reset the opacity before displaying new message
+
+            switch(country) {
+                case "USA":
+                    resultDiv.textContent = "Visa required for most applicants.";
+                    break;
+                case "Canada":
+                    resultDiv.textContent = "Visa required unless you have an eTA.";
+                    break;
+                case "India":
+                    resultDiv.textContent = "Visa required before travel.";
+                    break;
+                case "UK":
+                    resultDiv.textContent = "Visa depends on the duration of stay.";
+                    break;
+                case "Australia":
+                    resultDiv.textContent = "eVisa available for eligible travelers.";
+                    break;
+                default:
+                    resultDiv.textContent = "Please select a country.";
+                    resultDiv.classList.add("alert");
+                    break;
+            }
+
+            // Display the result with animation
+            setTimeout(() => {
+                resultDiv.style.opacity = "1";
+            }, 200);
+        }
+    </script>
+</body>
+</html>
