@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Application</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background and body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://media.istockphoto.com/id/157383627/photo/passport-and-visa-stamps.jpg?s=612x612&w=0&k=20&c=R1g7DwgJUL9SF3Cql0F5QNpMrGE1-nDepgHR94S2uCg=');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            margin: 0;
+        }
+
+        /* Container for the form */
+        .container {
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px; /* Round corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            border: 2px solid rgba(255, 255, 255, 0.7); /* Light transparent border */
+            background-color: transparent; /* Make the background transparent */
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f1c40f;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: block;
+            color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 1rem;
+            border-radius: 10px; /* Rounded input fields */
+            border: 1px solid #ccc;
+            outline: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        input, select {
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+        }
+
+        input:focus, select:focus {
+            border: 2px solid #f39c12;
+        }
+
+        /* Hover effect for input fields */
+        input:hover, select:hover {
+            border: 2px solid #f39c12;
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Hover effect for button */
+        button {
+            background-color: #f39c12;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Result messages */
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #e74c3c;
+        }
+
+        .success {
+            color: #2ecc71;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            input, select, button {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Visa Application Form</h2>
+        <form id="visaForm">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Name">
+            </div>
+
+            <!-- Passport Number -->
+            <div class="form-group">
+                <label for="passport">Passport Number</label>
+                <input type="text" id="passport" name="passport" required placeholder="Passport Number">
+            </div>
+
+            <!-- Country Selection -->
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="">--Select a Country--</option>
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <option value="India">India</option>
+                    <option value="UK">UK</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </div>
+
+            <button type="submit">Apply for Visa</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('visaForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the form inputs
+            const name = document.getElementById('name').value;
+            const passport = document.getElementById('passport').value;
+            const country = document.getElementById('country').value;
+            const resultDiv = document.getElementById('result');
+
+            // Clear previous messages
+            resultDiv.textContent = '';
+            resultDiv.classList.remove('error', 'success');
+
+            // Validate fields
+            if (!name || !passport || !country) {
+                resultDiv.textContent = 'All fields are required!';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            // Validate passport number length
+            if (passport.length < 8 || passport.length > 10) {
+                resultDiv.textContent = 'Invalid passport number!';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            // If all validations pass, show success message
+            resultDiv.textContent = 'Visa application submitted successfully!';
+            resultDiv.classList.add('success');
+        });
+    </script>
+
+</body>
+</html>
