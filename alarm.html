@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Alarm</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
     <style>
-        body.countdown-page {
+        body.alarm-page {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-image: url('https://ichef.bbci.co.uk/images/ic/480xn/p02k6vry.jpg.webp');
+            background-image: url('https://i.guim.co.uk/img/media/1119ce1080a7e64751cc51143e09d4b44a82d577/0_0_3500_2100/master/3500.jpg?width=465&dpr=1&s=none&crop=none');
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -24,12 +23,11 @@
         header {
             width: 100%;
             background: rgba(0, 0, 0, 0.8);
-            padding: 15px 0;
+            padding: 10px 0;
             text-align: center;
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 1000;
         }
         nav ul {
             list-style: none;
@@ -45,20 +43,19 @@
             color: white;
             text-decoration: none;
             font-size: 18px;
-            padding: 10px 15px;
+            padding: 10px;
             transition: 0.3s;
         }
         nav ul li a:hover {
             background: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
-            transform: scale(1.1);
         }
         .container {
             background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            margin-top: 80px;
+            margin-top: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -66,30 +63,24 @@
             width: 50%;
         }
         input, button {
-            padding: 12px;
+            padding: 10px;
             margin: 10px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
             font-size: 16px;
         }
-        button {
-            background: #ff9800;
-            color: white;
-            transition: 0.3s;
-        }
         button:hover {
-            background: #e68900;
+            background: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
         }
-        #countdown-display {
-            font-size: 2.5em;
-            margin-top: 20px;
-            font-weight: bold;
+        ul {
+            list-style: none;
+            padding: 0;
         }
     </style>
 </head>
-<body class="countdown-page">
+<body class="alarm-page">
     <header>
         <nav>
             <ul>
@@ -101,11 +92,11 @@
         </nav>
     </header>
     <div class="container">
-        <h1>Countdown Timer</h1>
-        <input type="number" id="countdown-minutes" placeholder="Minutes">
-        <input type="number" id="countdown-seconds" placeholder="Seconds">
-        <button onclick="startCountdown()">Start</button>
-        <div id="countdown-display">00:00</div>
+        <h1>Set an Alarm</h1>
+        <input type="text" id="alarm-time" placeholder="HH:MM AM/PM" onkeypress="handleKeyPress(event)">
+        <button onclick="setAlarm()">Set Alarm</button>
+        <button onclick="toggleAlarm()">Enable/Disable Alarm</button>
+        <ul id="alarms-list"></ul>
     </div>
 </body>
 </html>
