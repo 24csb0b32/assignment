@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        /* Set background image for the entire page */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://png.pngtree.com/thumb_back/fh260/background/20220427/pngtree-tiny-business-people-and-manager-at-tasks-and-goals-accomplishment-chart-image_1091427.jpg') no-repeat center center fixed;
+            background-size: cover;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Grey transparent container in the middle */
+        .container {
+            background-color: rgba(169, 169, 169, 0.7); /* Grey transparent */
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Add a playful sentence above the title */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .task-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #taskDescription, #taskTime {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Blue button style */
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF; /* Blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        #taskList {
+            margin-top: 20px;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-item span {
+            font-size: 16px;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Playful message for lazy bots -->
+     
+        
+        <h1>Task Manager</h1>
+        <div class="task-input">
+            <input type="text" id="taskDescription" placeholder="Enter your task" required>
+            <input type="number" id="taskTime" placeholder="Time in minutes" required>
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <div id="taskList"></div>
+    </div>
+
+    <audio id="beepSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+    <script>
+        let taskList = [];
+
+        function addTask() {
+            const description = document.getElementById("taskDescription").value;
+            const time = document.getElementById("taskTime").value;
+
+            if (description && time) {
+                // Create task object with time converted to milliseconds
+                const task = {
+                    description: description,
+                    time: time * 60 * 1000, // time in milliseconds
+                    startTime: Date.now(),
+                    intervalId: null, // To store the interval ID
+                    id: Date.now() // Unique task ID (using timestamp)
+                };
+
+                taskList.push(task);
+                displayTasks();
+                startTimer(task);
+            }
+        }
+
+        function displayTasks() {
+            const taskListDiv = document.getElementById("taskList");
+            taskListDiv.innerHTML = ""; // Clear the list before re-displaying
+
+            taskList.forEach((task) => {
+                const taskItem = document.createElement("div");
+                taskItem.classList.add("task-item");
+
+                const timeRemaining = Math.max(0, task.time - (Date.now() - task.startTime));
+                const minutes = Math.floor(timeRemaining / 60000);
+                const seconds = Math.floor((timeRemaining % 60000) / 1000);
+
+                taskItem.innerHTML = `
+                    <span>${task.description}</span>
+                    <span>${minutes}m ${seconds}s</span>
+                    <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                `;
+
+                taskListDiv.appendChild(taskItem);
+            });
+        }
+
+        function startTimer(task) {
+            task.intervalId = setInterval(() => {
+                const timeRemaining = task.time - (Date.now() - task.startTime);
+
+                if (timeRemaining <= 0) {
+                    clearInterval(task.intervalId);
+                    document.getElementById("beepSound").play();
+                    alert(`${task.description} time is up!`);
+                }
+
+                displayTasks();
+            }, 1000);
+        }
+
+        function deleteTask(taskId) {
+            // Find task by ID and remove it from the task list
+            taskList = taskList.filter(task => task.id !== taskId);
+            displayTasks(); // Re-render the task list
+        }
+    </script>
+</body>
+</html>
